@@ -18,6 +18,6 @@ publish:
     - gem build foghorn.gemspec
     - |
       curl --fail --request POST \
-        --header "Job-Token: ${CI_JOB_TOKEN}" \
+        --header "Job-Token: ${DEPLOY_TOKEN}" \
         --form "file=@$(ls foghorn-*.gem)" \
         "https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/rubygems/api/v1/gems"
