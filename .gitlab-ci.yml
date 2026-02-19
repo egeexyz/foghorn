@@ -1,0 +1,24 @@
+stages:
+  - test
+  - publish
+
+test:
+  stage: test
+  image: ruby:3.3
+  script:
+    - bundle install
+    - bundle exec rake test
+
+publish:
+  stage: publish
+  image: ruby:3.3
+  only:
+    - tags
+  script:
+    - gem build foghorn.gemspec
+    - mkdir -p ~/.gem
+    - |
+      echo "---" > ~/.gem/credentials
+      echo ":gitlab: Bearer ${CI_JOB_TOKEN}" >> ~/.gem/credentials
+      chmod 0600 ~/.gem/credentials
+    - gem push foghorn-*.gem --host "https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/rubygems" --key gitlab
