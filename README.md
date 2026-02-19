@@ -1,8 +1,8 @@
 # 🌫️ Foghorn
 
-A readable, terminal-friendly logger for Ruby CLIs.
+A readable, terminal-friendly logger for Ruby!
 
-Foghorn provides you with colored console output with optional dual-write to a plain-text log file. No monkey-patching, no enterprise bloat — just clear signals through the noise.
+Foghorn gives you colored console output with optional dual-write to a plain-text log file. No monkey-patching, no enterprise bloat — just clear signals through the noise.
 
 ## Installation
 
