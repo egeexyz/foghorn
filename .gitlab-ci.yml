@@ -16,9 +16,8 @@ publish:
     - tags
   script:
     - gem build foghorn.gemspec
-    - mkdir -p ~/.gem
     - |
-      echo "---" > ~/.gem/credentials
-      echo ":gitlab: Bearer ${CI_JOB_TOKEN}" >> ~/.gem/credentials
-      chmod 0600 ~/.gem/credentials
-    - gem push foghorn-*.gem --host "https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/rubygems" --key gitlab
+      curl --fail --request POST \
+        --header "Job-Token: ${CI_JOB_TOKEN}" \
+        --form "file=@$(ls foghorn-*.gem)" \
+        "https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/rubygems/api/v1/gems"
