@@ -54,6 +54,13 @@ module Foghorn
       @level == :debug
     end
 
+    def space
+      return if quiet?
+
+      puts ''
+      log_to_file('')
+    end
+
     def info(message)
       return if quiet?
 
